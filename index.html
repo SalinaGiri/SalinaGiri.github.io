@@ -1,0 +1,384 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Salina Giri — Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Press+Start+2P&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --cream:#FFF7EE; --pink:#FFB8D2; --pink-soft:#FFE0EC;
+    --butter:#FFE9A8; --sky:#AEE0FF; --mint:#C7F0D8; --lilac:#E2D2FF;
+    --ink:#5B4B6B; --ink-soft:#8A7A99; --panel:#FFFFFF;
+    --radius:22px; --line:3px solid var(--ink);
+    --shadow:6px 6px 0 var(--ink); --shadow-sm:4px 4px 0 var(--ink);
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0; font-family:"Fredoka",system-ui,sans-serif; color:var(--ink);
+    background:
+      radial-gradient(var(--pink-soft) 1.4px, transparent 1.4px) 0 0/26px 26px,
+      linear-gradient(180deg,#FFEFF6 0%, #FBF3FF 22%, var(--cream) 55%);
+    line-height:1.5; overflow-x:hidden;
+  }
+  a{color:inherit;}
+  .pixel{font-family:"Press Start 2P",monospace;}
+
+  /* ===== background scenery ===== */
+  .sun{position:fixed;top:46px;right:54px;width:78px;height:78px;border-radius:50%;background:var(--butter);
+    border:var(--line);box-shadow:0 0 0 10px rgba(255,233,168,.45);z-index:0;animation:bob 7s ease-in-out infinite;}
+  .sprites{position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden;}
+  .sprite{position:absolute;animation:bob 6s ease-in-out infinite;}
+  .cloud{width:70px;height:34px;background:var(--panel);border:var(--line);border-radius:40px;}
+  .cloud::before,.cloud::after{content:"";position:absolute;background:var(--panel);border:var(--line);border-radius:50%;}
+  .cloud::before{width:34px;height:34px;left:8px;top:-16px;}
+  .cloud::after{width:26px;height:26px;right:10px;top:-12px;}
+  .cloud.big{transform:scale(1.3);} .cloud.sm{transform:scale(.75);}
+  .emo{font-size:24px;}
+  .c1{top:12%;left:5%;animation-delay:0s;} .c2{top:30%;right:9%;animation-delay:1.5s;}
+  .c3{top:62%;left:3%;animation-delay:.8s;} .c4{top:80%;right:6%;animation-delay:.3s;}
+  .e1{top:18%;left:40%;animation-delay:.4s;} .e2{top:74%;right:16%;animation-delay:2s;}
+  .e3{top:46%;left:90%;animation-delay:1.1s;} .e4{top:88%;left:30%;animation-delay:.6s;}
+  .e5{top:24%;right:30%;animation-delay:1.3s;} .e6{top:54%;left:8%;animation-delay:.9s;}
+  .e7{top:38%;left:24%;animation-delay:1.8s;} .e8{top:66%;right:34%;animation-delay:.5s;}
+  @keyframes bob{0%,100%{transform:translateY(0) rotate(-2deg);}50%{transform:translateY(-14px) rotate(2deg);}}
+  @keyframes twinkle{0%,100%{opacity:.45;transform:scale(.9);}50%{opacity:1;transform:scale(1.15);}}
+  .emo{animation:bob 6s ease-in-out infinite, twinkle 2.6s ease-in-out infinite;}
+
+  /* ===== character ===== */
+  .girl-wrap.idle{animation:floaty 2.6s ease-in-out infinite;}
+  @keyframes floaty{0%,100%{transform:translateY(0);}50%{transform:translateY(-9px);}}
+
+  /* ===== bottom tab bar (Mario platforms) ===== */
+  .tabbar{position:fixed;left:50%;bottom:16px;transform:translateX(-50%);z-index:50;background:var(--panel);
+    border:var(--line);border-radius:26px;box-shadow:var(--shadow);padding:10px 14px;max-width:calc(100vw - 20px);}
+  .tabs{position:relative;display:flex;gap:6px;}
+  .tab{display:flex;flex-direction:column;align-items:center;gap:3px;background:var(--cream);border:2.5px solid var(--ink);
+    border-radius:14px;padding:8px 12px;cursor:pointer;font-family:inherit;color:var(--ink);transition:background .2s,transform .2s;min-width:54px;}
+  .tab .ticon{font-size:18px;line-height:1;}
+  .tab .tlabel{font-size:11px;font-weight:600;}
+  .tab.active{background:var(--pink);transform:translateY(2px);}
+  .runner{position:absolute;top:-50px;left:0;width:40px;height:50px;pointer-events:none;
+    transition:left .46s cubic-bezier(.45,-0.3,.5,1.4);}
+  .runner.hop .girl-wrap{animation:hop .5s ease;}
+  @keyframes hop{0%{transform:translateY(0) scaleY(1);}22%{transform:translateY(-32px) scaleY(1.07);}
+    50%{transform:translateY(-40px) scaleY(1.03);}74%{transform:translateY(0) scaleY(.82);}
+    88%{transform:translateY(-4px) scaleY(1.05);}100%{transform:translateY(0) scaleY(1);}}
+  .runner .girl-wrap{animation:floaty 2.6s ease-in-out infinite;}
+
+  /* ===== layout ===== */
+  main{position:relative;z-index:1;max-width:920px;margin:0 auto;padding:0 22px 140px;}
+  section{margin-top:90px;scroll-margin-top:30px;}
+  .eyebrow{display:inline-block;font-family:"Press Start 2P",monospace;font-size:11px;background:var(--butter);
+    border:var(--line);border-radius:30px;padding:8px 14px;box-shadow:var(--shadow-sm);margin-bottom:22px;}
+
+  .hero{min-height:92vh;display:flex;align-items:center;justify-content:center;text-align:center;padding-top:30px;}
+  .cartridge{background:var(--panel);border:var(--line);border-radius:var(--radius);box-shadow:var(--shadow);
+    padding:40px 38px 34px;max-width:620px;width:100%;position:relative;}
+  .cartridge .tag{position:absolute;top:-16px;left:50%;transform:translateX(-50%);background:var(--sky);
+    border:var(--line);border-radius:20px;padding:6px 14px;font-family:"Press Start 2P",monospace;font-size:9px;
+    box-shadow:var(--shadow-sm);white-space:nowrap;}
+  .hero .girl-wrap{width:128px;margin:6px auto 4px;}
+  .hero h1{font-family:"Press Start 2P",monospace;font-size:clamp(20px,5vw,36px);line-height:1.3;margin:8px 0 4px;text-shadow:3px 3px 0 var(--pink);}
+  .hero h1 span{display:inline-block;opacity:0;transform:translateY(14px);animation:pop .5s ease forwards;}
+  @keyframes pop{to{opacity:1;transform:none;}}
+  .hero .sub{font-size:clamp(16px,2.4vw,20px);font-weight:500;max-width:440px;margin:14px auto 0;}
+  .coins{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:16px;}
+  .coin{font-family:"Press Start 2P",monospace;font-size:9px;background:var(--pink-soft);border:var(--line);border-radius:20px;padding:7px 12px;}
+  .press{margin-top:24px;background:none;border:none;cursor:pointer;font-family:"Press Start 2P",monospace;font-size:13px;color:var(--ink);animation:blink 1.1s steps(1) infinite;padding:6px;}
+  @keyframes blink{50%{opacity:.25;}}
+
+  .panel{background:var(--panel);border:var(--line);border-radius:var(--radius);box-shadow:var(--shadow);padding:28px;}
+  h2{font-family:"Press Start 2P",monospace;font-size:clamp(15px,3vw,20px);margin:0 0 6px;}
+  .lead{color:var(--ink-soft);font-weight:500;margin:0 0 4px;}
+
+  .player{display:grid;grid-template-columns:auto 1fr;gap:26px;align-items:center;}
+  .player .girl-wrap{width:96px;}
+  .player p{margin:0 0 12px;}
+  .badges{display:flex;gap:8px;flex-wrap:wrap;}
+  .badge{font-size:14px;font-weight:600;background:var(--butter);border:2.5px solid var(--ink);border-radius:16px;padding:4px 12px;}
+
+  .inv-group{margin-top:18px;}
+  .inv-group h3{font-family:"Press Start 2P",monospace;font-size:10px;color:var(--ink-soft);margin:0 0 12px;}
+  .inv{display:flex;gap:10px;flex-wrap:wrap;}
+  .item{font-weight:600;background:var(--cream);border:2.5px solid var(--ink);border-radius:14px;padding:7px 13px;box-shadow:2px 2px 0 var(--ink);transition:transform .12s,box-shadow .12s;}
+  .item:hover{transform:translate(-2px,-2px);box-shadow:4px 4px 0 var(--ink);}
+
+  .xp{position:relative;background:var(--panel);border:var(--line);border-radius:var(--radius);box-shadow:var(--shadow);padding:30px 28px 26px;overflow:hidden;}
+  .xp .ribbon{position:absolute;top:16px;right:-42px;transform:rotate(45deg);background:var(--mint);border-top:var(--line);border-bottom:var(--line);font-family:"Press Start 2P",monospace;font-size:8px;padding:6px 50px;}
+  .xp .role{font-size:22px;font-weight:700;margin:4px 0 2px;}
+  .xp .meta{display:flex;gap:10px;flex-wrap:wrap;margin:8px 0 14px;}
+  .xp .meta span{font-family:"Press Start 2P",monospace;font-size:8px;background:var(--sky);border:2.5px solid var(--ink);border-radius:14px;padding:6px 9px;}
+  .xp ul{margin:0;padding-left:0;list-style:none;display:flex;flex-direction:column;gap:9px;}
+  .xp li{position:relative;padding-left:28px;font-size:15.5px;}
+  .xp li::before{content:"✓";position:absolute;left:0;top:0;width:20px;height:20px;background:var(--mint);border:2.5px solid var(--ink);border-radius:6px;font-size:11px;display:flex;align-items:center;justify-content:center;}
+
+  .quests{display:grid;grid-template-columns:repeat(auto-fill,minmax(255px,1fr));gap:22px;}
+  .quest{background:var(--panel);border:var(--line);border-radius:var(--radius);box-shadow:var(--shadow);padding:22px;display:flex;flex-direction:column;gap:12px;transition:transform .14s,box-shadow .14s;}
+  .quest:hover{transform:translate(-3px,-3px);box-shadow:9px 9px 0 var(--ink);}
+  .quest .top{display:flex;align-items:center;gap:12px;}
+  .quest .icon{width:48px;height:48px;flex:none;border:var(--line);border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:24px;}
+  .quest .lv{font-family:"Press Start 2P",monospace;font-size:8px;background:var(--butter);border:2.5px solid var(--ink);border-radius:14px;padding:5px 8px;margin-left:auto;}
+  .quest h3{margin:0;font-size:19px;font-weight:600;}
+  .quest p{margin:0;font-size:15px;flex:1;}
+  .loot{display:flex;gap:6px;flex-wrap:wrap;}
+  .loot span{font-size:12px;font-weight:600;background:var(--pink-soft);border:2px solid var(--ink);border-radius:11px;padding:3px 9px;}
+  .quest .links{display:flex;gap:10px;margin-top:2px;}
+  .qbtn{font-weight:600;font-size:14px;text-decoration:none;border:2.5px solid var(--ink);border-radius:14px;padding:6px 14px;box-shadow:2px 2px 0 var(--ink);transition:transform .12s,box-shadow .12s;}
+  .qbtn:hover{transform:translate(-2px,-2px);box-shadow:4px 4px 0 var(--ink);}
+  .qbtn.code{background:var(--sky);}
+  .ic-pink{background:var(--pink);}.ic-sky{background:var(--sky);}.ic-butter{background:var(--butter);}.ic-soft{background:var(--pink-soft);}.ic-mint{background:var(--mint);}.ic-lilac{background:var(--lilac);}
+
+  .save{text-align:center;}
+  .menu{display:flex;flex-direction:column;gap:14px;max-width:360px;margin:22px auto 0;}
+  .menu a{display:flex;align-items:center;gap:14px;text-decoration:none;font-weight:600;font-size:17px;background:var(--panel);border:var(--line);border-radius:18px;padding:14px 20px;box-shadow:var(--shadow-sm);transition:transform .12s,background .12s,box-shadow .12s;}
+  .menu a:hover{transform:translate(-3px,-3px);background:var(--pink-soft);box-shadow:6px 6px 0 var(--ink);}
+  .menu a .arrow{margin-left:auto;font-family:"Press Start 2P",monospace;font-size:12px;}
+  footer{text-align:center;margin-top:70px;font-family:"Press Start 2P",monospace;font-size:9px;color:var(--ink-soft);}
+
+  .reveal{opacity:0;transform:translateY(24px);transition:opacity .55s ease,transform .55s ease;}
+  .reveal.in{opacity:1;transform:none;}
+  a:focus-visible,button:focus-visible{outline:3px solid var(--sky);outline-offset:3px;}
+
+  @media(max-width:560px){
+    .player{grid-template-columns:1fr;text-align:center;justify-items:center;}
+    .cartridge{padding:34px 22px;}
+    .tab{min-width:46px;padding:7px 8px;} .tab .tlabel{display:none;} .tab .ticon{font-size:20px;}
+    .sun{width:60px;height:60px;top:30px;right:24px;}
+  }
+  @media (prefers-reduced-motion:reduce){
+    *{animation:none!important;scroll-behavior:auto;}
+    .reveal{opacity:1;transform:none;} .runner{transition:none;}
+    .hero h1 span{opacity:1;transform:none;}
+  }
+</style>
+</head>
+<body>
+
+<div class="sun" aria-hidden="true"></div>
+<div class="sprites" aria-hidden="true">
+  <div class="sprite cloud big c1"></div><div class="sprite cloud c2"></div>
+  <div class="sprite cloud sm c3"></div><div class="sprite cloud c4"></div>
+  <div class="sprite emo e1">⭐</div><div class="sprite emo e2">🩷</div><div class="sprite emo e3">✨</div>
+  <div class="sprite emo e4">⭐</div><div class="sprite emo e5">🌸</div><div class="sprite emo e6">🪙</div>
+  <div class="sprite emo e7">🎮</div><div class="sprite emo e8">💖</div>
+</div>
+
+<!-- ===== MARIO-STYLE TAB BAR ===== -->
+<nav class="tabbar" aria-label="Sections">
+  <div class="tabs" id="tabs">
+    <button class="tab active" data-target="player"><span class="ticon">🧍‍♀️</span><span class="tlabel">Me</span></button>
+    <button class="tab" data-target="inventory"><span class="ticon">🎒</span><span class="tlabel">Skills</span></button>
+    <button class="tab" data-target="experience"><span class="ticon">⭐</span><span class="tlabel">Work</span></button>
+    <button class="tab" data-target="quests"><span class="ticon">🎮</span><span class="tlabel">Projects</span></button>
+    <button class="tab" data-target="save"><span class="ticon">✉️</span><span class="tlabel">Contact</span></button>
+    <div class="runner" id="runner">
+      <div class="girl-wrap">
+        <svg class="girl" viewBox="0 0 64 88" width="40" height="55" aria-hidden="true">
+          <path d="M11 31 Q11 6 32 6 Q53 6 53 31 L53 72 Q53 79 46 79 L18 79 Q11 79 11 72 Z" fill="#7a4a2b"/>
+          <circle cx="32" cy="30" r="16" fill="#f6d2b8"/>
+          <path d="M17 27 Q19 13 32 13 Q45 13 47 27 Q40 20 32 22 Q24 20 17 27Z" fill="#8a5532"/>
+          <ellipse cx="26" cy="30" rx="2.3" ry="3.1" fill="#3b2a32"/><ellipse cx="38" cy="30" rx="2.3" ry="3.1" fill="#3b2a32"/>
+          <circle cx="26.8" cy="29" r=".8" fill="#fff"/><circle cx="38.8" cy="29" r=".8" fill="#fff"/>
+          <circle cx="22" cy="35" r="2.8" fill="#ffb3c8" opacity=".75"/><circle cx="42" cy="35" r="2.8" fill="#ffb3c8" opacity=".75"/>
+          <path d="M29 37 Q32 40 35 37" stroke="#b06a78" stroke-width="1.6" fill="none" stroke-linecap="round"/>
+          <path d="M24 54 L40 54 L45 81 L19 81 Z" fill="#ff9ec4"/>
+          <rect x="20" y="55" width="4" height="13" rx="2" fill="#f6d2b8"/><rect x="40" y="55" width="4" height="13" rx="2" fill="#f6d2b8"/>
+        </svg>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<main>
+
+  <!-- HERO -->
+  <header class="hero">
+    <div class="cartridge">
+      <span class="tag pixel">SALINA'S WORLD</span>
+      <div class="girl-wrap idle">
+        <svg class="girl" viewBox="0 0 64 88" width="128" height="176" role="img" aria-label="Illustration of Salina">
+          <path d="M11 31 Q11 6 32 6 Q53 6 53 31 L53 72 Q53 79 46 79 L18 79 Q11 79 11 72 Z" fill="#7a4a2b"/>
+          <circle cx="32" cy="30" r="16" fill="#f6d2b8"/>
+          <path d="M17 27 Q19 13 32 13 Q45 13 47 27 Q40 20 32 22 Q24 20 17 27Z" fill="#8a5532"/>
+          <ellipse cx="26" cy="30" rx="2.3" ry="3.1" fill="#3b2a32"/><ellipse cx="38" cy="30" rx="2.3" ry="3.1" fill="#3b2a32"/>
+          <circle cx="26.8" cy="29" r=".8" fill="#fff"/><circle cx="38.8" cy="29" r=".8" fill="#fff"/>
+          <circle cx="22" cy="35" r="2.8" fill="#ffb3c8" opacity=".75"/><circle cx="42" cy="35" r="2.8" fill="#ffb3c8" opacity=".75"/>
+          <path d="M29 37 Q32 40 35 37" stroke="#b06a78" stroke-width="1.6" fill="none" stroke-linecap="round"/>
+          <path d="M24 54 L40 54 L45 81 L19 81 Z" fill="#ff9ec4"/>
+          <rect x="20" y="55" width="4" height="13" rx="2" fill="#f6d2b8"/><rect x="40" y="55" width="4" height="13" rx="2" fill="#f6d2b8"/>
+        </svg>
+      </div>
+      <h1 id="title"></h1>
+      <p class="sub">Applied Computer Science student. I build full systems — from hardware and firmware up to apps in the cloud.</p>
+      <div class="coins"><span class="coin">📍 LEUVEN</span><span class="coin">HARDWARE → CLOUD</span></div>
+      <button class="press" id="start">▸ PRESS START</button>
+    </div>
+  </header>
+
+  <!-- PLAYER -->
+  <section id="player">
+    <span class="eyebrow">PLAYER 1</span>
+    <div class="panel player reveal">
+      <div class="girl-wrap idle">
+        <svg class="girl" viewBox="0 0 64 88" width="96" height="132" aria-hidden="true">
+          <path d="M11 31 Q11 6 32 6 Q53 6 53 31 L53 72 Q53 79 46 79 L18 79 Q11 79 11 72 Z" fill="#7a4a2b"/>
+          <circle cx="32" cy="30" r="16" fill="#f6d2b8"/>
+          <path d="M17 27 Q19 13 32 13 Q45 13 47 27 Q40 20 32 22 Q24 20 17 27Z" fill="#8a5532"/>
+          <ellipse cx="26" cy="30" rx="2.3" ry="3.1" fill="#3b2a32"/><ellipse cx="38" cy="30" rx="2.3" ry="3.1" fill="#3b2a32"/>
+          <circle cx="26.8" cy="29" r=".8" fill="#fff"/><circle cx="38.8" cy="29" r=".8" fill="#fff"/>
+          <circle cx="22" cy="35" r="2.8" fill="#ffb3c8" opacity=".75"/><circle cx="42" cy="35" r="2.8" fill="#ffb3c8" opacity=".75"/>
+          <path d="M29 37 Q32 40 35 37" stroke="#b06a78" stroke-width="1.6" fill="none" stroke-linecap="round"/>
+          <path d="M24 54 L40 54 L45 81 L19 81 Z" fill="#ff9ec4"/>
+          <rect x="20" y="55" width="4" height="13" rx="2" fill="#f6d2b8"/><rect x="40" y="55" width="4" height="13" rx="2" fill="#f6d2b8"/>
+        </svg>
+      </div>
+      <div>
+        <p>Hi, I'm Salina — a second-year Applied CS student at UC Leuven-Limburg. I'm happiest when a project spans the whole stack: wiring up a microcontroller in C, writing the backend, and shipping the front-end. I like building things that actually run, solo and in teams.</p>
+        <div class="badges"><span class="badge">English · C2</span><span class="badge">Dutch · A1</span><span class="badge">Nepali · native</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- INVENTORY -->
+  <section id="inventory">
+    <span class="eyebrow">INVENTORY</span>
+    <div class="panel reveal">
+      <h2>Skills &amp; tools</h2>
+      <p class="lead">Collected across 20 courses and a stack of projects.</p>
+      <div class="inv-group"><h3>LANGUAGES</h3><div class="inv">
+        <span class="item">Java</span><span class="item">Python</span><span class="item">TypeScript</span><span class="item">JavaScript</span><span class="item">C</span><span class="item">SQL</span><span class="item">HTML/CSS</span></div></div>
+      <div class="inv-group"><h3>FRONT-END</h3><div class="inv">
+        <span class="item">React</span><span class="item">Next.js</span></div></div>
+      <div class="inv-group"><h3>BACK-END &amp; DATA</h3><div class="inv">
+        <span class="item">Spring Boot</span><span class="item">Node.js</span><span class="item">PostgreSQL</span><span class="item">MongoDB</span><span class="item">Redis</span><span class="item">Pandas</span></div></div>
+      <div class="inv-group"><h3>CLOUD &amp; OPS</h3><div class="inv">
+        <span class="item">Azure</span><span class="item">Docker</span><span class="item">Linux</span><span class="item">CI/CD</span><span class="item">Git</span></div></div>
+      <div class="inv-group"><h3>EMBEDDED</h3><div class="inv">
+        <span class="item">ESP32</span><span class="item">Arduino (C++)</span><span class="item">WebSocket</span><span class="item">RF</span></div></div>
+    </div>
+  </section>
+
+  <!-- EXPERIENCE -->
+  <section id="experience">
+    <span class="eyebrow">EXPERIENCE</span>
+    <div class="xp reveal">
+      <div class="ribbon pixel">QUEST CLEAR</div>
+      <p class="lead" style="margin:0;">Junior Full-Stack Developer</p>
+      <div class="role">UCLL — Real Client Project 🏫</div>
+      <div class="meta"><span>SEP 2025 – JAN 2026</span><span>SCRUM TEAM</span></div>
+      <p style="margin:0 0 14px;">Built an attendance-tracking app for UCLL lecturers as part of an Agile student team, delivering for a real client over the semester.</p>
+      <ul>
+        <li>Built the responsive React / Next.js front-end — attendance sorting, search, and graph-based reports for lecturers.</li>
+        <li>Wrote server-side logic in Java and optimised data retrieval with SQL and JPQL.</li>
+        <li>Worked in full Scrum: daily stand-ups, sprint planning, QA, and demos to the client each sprint.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- QUESTS -->
+  <section id="quests">
+    <span class="eyebrow">QUEST LOG</span>
+    <h2 style="margin-bottom:6px;">Projects</h2>
+    <p class="lead" style="margin-bottom:24px;">Six builds, hardware to cloud.</p>
+    <div class="quests">
+      <article class="quest reveal"><div class="top"><div class="icon ic-pink">🔥</div><span class="lv">LV.05</span></div>
+        <h3>Fire-Fighting Robot</h3><p>An autonomous IoT robot that detects flames, drives to them, and puts them out — with a live dashboard. I took the integration-engineer role.</p>
+        <div class="loot"><span>ESP32</span><span>C++</span><span>Java</span><span>TypeScript</span></div>
+        <div class="links"><a class="qbtn code" href="https://github.com/SalinaGiri/fire-fighting-robot">Code</a></div></article>
+
+      <article class="quest reveal"><div class="top"><div class="icon ic-sky">☁️</div><span class="lv">LV.05</span></div>
+        <h3>Finance Tracker</h3><p>A cloud-native finance app on Microsoft Azure. I built the infrastructure-as-code, serverless backend, and async messaging.</p>
+        <div class="loot"><span>Azure</span><span>Bicep</span><span>Functions</span><span>Service Bus</span></div>
+        <div class="links"><a class="qbtn code" href="https://github.com/SalinaGiri/Finance-Tracker">Code</a></div></article>
+
+      <article class="quest reveal"><div class="top"><div class="icon ic-butter">📋</div><span class="lv">LV.04</span></div>
+        <h3>Attendance System</h3><p>A full-stack attendance app built for UCLL as a real client, in a Scrum team. I worked front-end: sorting, graphs, and the UI.</p>
+        <div class="loot"><span>React</span><span>Next.js</span><span>Java</span><span>Scrum</span></div>
+        <div class="links"><a class="qbtn code" href="https://github.com/SalinaGiri/attendance-tracking-system">Code</a></div></article>
+
+      <article class="quest reveal"><div class="top"><div class="icon ic-soft">🖥️</div><span class="lv">LV.03</span></div>
+        <h3>Linux Servers</h3><p>Configured and hardened a real Linux server: web, DNS, mail, database, scheduled jobs, and SSH protection.</p>
+        <div class="loot"><span>Linux</span><span>BIND</span><span>Apache</span><span>Docker</span></div>
+        <div class="links"><a class="qbtn code" href="https://github.com/SalinaGiri/SystemAndServers">Code</a></div></article>
+
+      <article class="quest reveal"><div class="top"><div class="icon ic-mint">📊</div><span class="lv">LV.04</span></div>
+        <h3>Data Engineering</h3><p>A batch pipeline over taxi trip data and a real-time pipeline tracking live store inventory, designed around GDPR.</p>
+        <div class="loot"><span>ETL</span><span>Batch</span><span>Real-time</span><span>Pipelines</span></div>
+        <div class="links"><a class="qbtn code" href="https://github.com/SalinaGiri/DataEngineeringProject">Code</a></div></article>
+
+      <article class="quest reveal"><div class="top"><div class="icon ic-lilac">🐉</div><span class="lv">LV.01</span></div>
+        <h3>Dungeon Crawler</h3><p>A 2D dungeon game in Python with enemy AI and custom mechanics — the project that made this whole game theme feel right.</p>
+        <div class="loot"><span>Python</span><span>Pygame</span></div>
+        <div class="links"><a class="qbtn code" href="https://github.com/SalinaGiri">Code</a></div></article>
+    </div>
+  </section>
+
+  <!-- SAVE -->
+  <section id="save">
+    <span class="eyebrow">SAVE &amp; CONNECT</span>
+    <div class="panel save reveal">
+      <h2>Let's team up</h2>
+      <p class="lead">Open to junior dev roles &amp; internships.</p>
+      <div class="menu">
+        <a href="https://github.com/SalinaGiri">🐙 GitHub <span class="arrow">▸</span></a>
+        <a href="https://www.linkedin.com/in/salina-giri">💼 LinkedIn <span class="arrow">▸</span></a>
+        <a href="mailto:saliinaa.a0@gmail.com">✉️ Email <span class="arrow">▸</span></a>
+      </div>
+    </div>
+  </section>
+
+  <footer>★ THANKS FOR PLAYING ★</footer>
+</main>
+
+<script>
+  (function(){
+    var t=document.getElementById('title'), name="SALINA GIRI";
+    name.split("").forEach(function(ch,i){
+      var s=document.createElement('span');
+      s.textContent = ch===" " ? "\u00A0" : ch;
+      s.style.animationDelay=(0.15+i*0.05)+"s"; t.appendChild(s);
+    });
+  })();
+
+  document.getElementById('start').addEventListener('click',function(){
+    document.getElementById('player').scrollIntoView({behavior:'smooth'});
+  });
+
+  var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});},{threshold:0.15});
+  document.querySelectorAll('.reveal').forEach(function(el){io.observe(el);});
+
+  // ===== girl hops across the tab bar =====
+  var tabs=[].slice.call(document.querySelectorAll('.tab'));
+  var runner=document.getElementById('runner');
+  var sections=tabs.map(function(t){return document.getElementById(t.dataset.target);});
+  var current=-1;
+
+  function place(i,doHop){
+    var tab=tabs[i];
+    var left=tab.offsetLeft + tab.offsetWidth/2 - 20;
+    runner.style.left=left+"px";
+    if(doHop){ runner.classList.remove('hop'); void runner.offsetWidth; runner.classList.add('hop'); }
+  }
+  function activate(i,doHop){
+    if(i<0||i===current) return;
+    current=i;
+    tabs.forEach(function(t,k){t.classList.toggle('active',k===i);});
+    place(i,doHop);
+  }
+  tabs.forEach(function(t,i){ t.addEventListener('click',function(){ sections[i].scrollIntoView({behavior:'smooth'}); }); });
+
+  var spy=new IntersectionObserver(function(es){
+    es.forEach(function(e){ if(e.isIntersecting){ var i=sections.indexOf(e.target); if(i>=0) activate(i,true); } });
+  },{rootMargin:"-45% 0px -45% 0px"});
+  sections.forEach(function(s){spy.observe(s);});
+
+  function initPos(){ place(current<0?0:current,false); }
+  window.addEventListener('load',function(){ activate(0,false); });
+  window.addEventListener('resize',initPos);
+</script>
+</body>
+</html>
