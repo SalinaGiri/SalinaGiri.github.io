@@ -7,7 +7,7 @@ img = Image.open(SRC).convert("RGB")
 w, h = img.size
 
 # Crop: centre on face + shoulders
-crop = img.crop((int(w*0.18), int(h*0.04), int(w*0.82), int(h*0.70)))
+crop = img.crop((int(w*0.18), int(h*0.32), int(w*0.82), int(h*0.82)))
 
 # Slight contrast/saturation boost before pixelating so colours pop
 crop = ImageEnhance.Contrast(crop).enhance(1.15)
