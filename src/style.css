@@ -86,7 +86,12 @@ h2{font-family:"Press Start 2P",monospace;font-size:clamp(15px,3vw,20px);margin:
 .lead{color:var(--ink-soft);font-weight:500;margin:0 0 4px;}
 
 .player{display:grid;grid-template-columns:auto 1fr;gap:26px;align-items:center;}
-.player .girl-wrap{width:96px;}
+.pixel-portrait-wrap{flex:none;}
+.pixel-portrait{
+  display:block;width:172px;height:auto;
+  border:var(--line);border-radius:14px;box-shadow:var(--shadow);
+  image-rendering:pixelated;image-rendering:crisp-edges;
+}
 .player p{margin:0 0 12px;}
 .badges{display:flex;gap:8px;flex-wrap:wrap;}
 .badge{font-size:14px;font-weight:600;background:var(--butter);border:2.5px solid var(--ink);border-radius:16px;padding:4px 12px;}
